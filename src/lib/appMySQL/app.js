@@ -1,11 +1,14 @@
-const db = require('mysql2')
 const config = require('../config')
-require('dotenv').config()
-
-const connections = db.createConnection({
+const sequelize = require('sequelize')
+const connections = new sequelize(config.dbName, config.dbUsername, config.dbPassword, {
     host: config.dbHost,
-    user: config.dbUsername,
-    database: config.dbName,
-    password: config.dbPassword
+    dialect: config.dbDialect,
+    pool: {
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+    },
+    logging: false
 })
 module.exports = connections
