@@ -1,6 +1,7 @@
 const dayjs = require("dayjs");
 const productTable = require("../../../entities/productEntity")
 const { v4: uuidv4 } = require('uuid');
+const { Success } = require("../../../helper/response");
 module.exports.PostCreateProduct = (req, res, { }) => {
     const id = uuidv4();
     const currentDate = dayjs().format("YYYY-MM-DD HH:mm:ss")
@@ -16,7 +17,7 @@ module.exports.PostCreateProduct = (req, res, { }) => {
 
     productTable.create(data)
         .then((result) => {
-            res.json(result)
+            return Success(res, result, "Success created")
         })
         .catch(err => {
             console.error(err.message)
