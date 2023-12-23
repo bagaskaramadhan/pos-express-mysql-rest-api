@@ -12,7 +12,6 @@ module.exports.PostCreateProduct = (req, res, { }) => {
         stock: req.body.stock,
         description: req.body.description,
         created_at: currentDate,
-        updated_at: currentDate,
     }
 
     productTable.create(data)
